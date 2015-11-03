@@ -1,5 +1,5 @@
-import * as counter from './counter';
+import count from './counter';
 
-console.log(counter);
+count();
 var x = () => 7;
 console.log(x());

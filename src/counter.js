@@ -1,3 +1,3 @@
-export function counter() {
+export default function count() {
   console.log('COUNT');
 }
