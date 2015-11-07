@@ -1,6 +1,6 @@
 import * as React from 'react';
-import CredentialStorageService from './CredentialStorageService'
 import * as DataRetrievalService from './DataRetrievalService'
+import CredentialStorageService from './CredentialStorageService'
 
 var PaulLoginForm = React.createClass({
   propTypes: {

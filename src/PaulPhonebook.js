@@ -12,13 +12,13 @@ var PaulPhonebook = React.createClass({
   getInitialState: function() {
     return {
       isLoggedIn: false,
-      data: null
+      data: []
     };
   },
   render: function() {
     if(this.state.isLoggedIn) {
       return (
-        <PaulSearchBox />
+        <PaulSearchBox data={this.state.data}/>
       );
     } else {
       return(
