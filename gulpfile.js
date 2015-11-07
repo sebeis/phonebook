@@ -1,10 +1,13 @@
 const gulp = require('gulp'),
 	browserify = require('browserify'),
 	babelify = require('babelify'),
+	sourcemaps = require('gulp-sourcemaps'),
+	uglify = require('gulp-uglify'),
 	connect = require('gulp-connect'),
 	source = require('vinyl-source-stream'),
 	gutil = require('gulp-util'),
-	del = require('del');
+	del = require('del'),
+	buffer = require('vinyl-buffer');
 
 function handleError(err) {
   console.log(err.toString());
@@ -16,7 +19,7 @@ gulp.task('watch', ['connect'], function() {
   gulp.watch(['src/**/*'], ['reload']);
 });
 
-gulp.task('connect', ['clean'], function() {
+gulp.task('connect', function() {
   connect.server({
     root: 'build',
     livereload: true
@@ -37,12 +40,14 @@ gulp.task('js', function() {
     	debug: true
   	})
     .transform(babelify, {
-			presets: 'es2015'
-		})
-    .on('error', handleError)
-    .bundle()
-    .on('error', handleError)
+			presets: ['es2015', 'react']
+		}).on('error', handleError)
+    .bundle().on('error', handleError)
     .pipe(source('bundle.js'))
+		.pipe(buffer())
+		//.pipe(sourcemaps.init({loadMaps: true}))
+    	//.pipe(uglify()).on('error', gutil.log)
+    //.pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('build/js'));
 });
 
