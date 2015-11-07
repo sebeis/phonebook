@@ -1,5 +1,6 @@
 import * as React from 'react';
 import PaulSearchBar from './PaulSearchBar'
+import LookupService from './LevenshteinLookupService'
 
 var PaulSearchBox = React.createClass({
   propTypes: {
@@ -9,8 +10,12 @@ var PaulSearchBox = React.createClass({
     return {
     };
   },
+  componentDidMount: function() {
+    LookupService.setData(this.props.data);
+  },
   handleSearchInput: function(text) {
-    console.log(this.props.data, text);
+    var matches = LookupService.getMatches(text);
+    console.log(matches);
   },
   render: function() {
     return (
