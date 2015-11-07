@@ -1,5 +1,6 @@
 import * as React from 'react';
 import PaulSearchBar from './PaulSearchBar'
+import PaulSearchResults from './PaulSearchResults'
 import LookupService from './LevenshteinLookupService'
 
 var PaulSearchBox = React.createClass({
@@ -15,14 +16,14 @@ var PaulSearchBox = React.createClass({
   },
   handleSearchInput: function(text) {
     var matches = LookupService.getMatches(text);
-    console.log(matches);
+    this.refs.results.updateMatches(matches);
   },
   render: function() {
     return (
       <div className="PaulSearchBox">
         <PaulSearchBar
           handleSearchInput={this.handleSearchInput}/>
-        <h2>Searchresults here</h2>
+        <PaulSearchResults ref="results"/>
       </div>
     );
   }

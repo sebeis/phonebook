@@ -7,7 +7,6 @@ export default {
     data = normalizeData(data_);
   },
   getMatches: function(input) {
-    console.log(input);
     return lookup(input);
   }
 }
