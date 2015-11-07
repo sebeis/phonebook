@@ -15,7 +15,8 @@ var PaulSearchBox = React.createClass({
   render: function() {
     return (
       <div className="PaulSearchBox">
-        <PaulSearchBar handleSearchInput={this.handleSearchInput}/>
+        <PaulSearchBar
+          handleSearchInput={this.handleSearchInput}/>
         <h2>Searchresults here</h2>
       </div>
     );

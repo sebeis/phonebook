@@ -3,11 +3,11 @@ import * as _ from 'lodash';
 
 var PaulSearchBar = React.createClass({
   propTypes: {
-    handleSearchInput: React.PropTypes.func.isRequired
+    handleSearchInput: React.PropTypes.func.isRequired,
   },
   handleInput: _.debounce(function(e) {
     this.props.handleSearchInput(this.refs.searchInput.value);
-  }, 400),
+  }, 350),
   render: function() {
     return (
       <div className="PaulSearchBar">
