@@ -22,7 +22,11 @@ var PaulSearchBar = React.createClass({
   render: function() {
     let loadingIcon;
     if(this.state.isLoading) {
-      loadingIcon = <h1>LOADING</h1>
+      loadingIcon = (
+        <span className="input-group-addon loading-indicator">
+          <i className="glyphicon glyphicon-refresh"></i>
+        </span>
+      );
     }
     return (
       <div className="input-group input-group-lg">
@@ -34,9 +38,7 @@ var PaulSearchBar = React.createClass({
           placeholder="Name oder Telefonnummer..."
           ref="searchInput"
           onChange={this.handleInput} />
-        <span className="input-group-addon loading-indicator">
-          <i className="glyphicon glyphicon-refresh"></i>
-        </span>
+        {loadingIcon}
       </div>
     );
   }

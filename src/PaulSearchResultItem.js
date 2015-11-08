@@ -18,7 +18,7 @@ var PaulSearchResultItem = React.createClass({
       );
     }
     return (
-      <li className="PaulSearchResultItem" className="panel person">
+      <li className={'panel person ' + (this.props.open ? 'panel-primary' : '')}>
         <div className="panel-heading">
           <div className="btn-toolbar pull-right">
             <a className="btn btn-primary"

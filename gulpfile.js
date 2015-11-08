@@ -4,10 +4,12 @@ const gulp = require('gulp'),
 	sourcemaps = require('gulp-sourcemaps'),
 	uglify = require('gulp-uglify'),
 	connect = require('gulp-connect'),
+  concat = require('gulp-concat'),
 	source = require('vinyl-source-stream'),
 	gutil = require('gulp-util'),
 	del = require('del'),
-	buffer = require('vinyl-buffer');
+	buffer = require('vinyl-buffer'),
+  minifyCss = require('gulp-minify-css');
 
 function handleError(err) {
   console.log(err.toString());
@@ -30,7 +32,7 @@ gulp.task('clean', function() {
 	return del('build');
 });
 
-gulp.task('reload', ['js', 'index'], function() {
+gulp.task('reload', ['js', 'index', 'css'], function() {
   gulp.src('').pipe(connect.reload());
 });
 
@@ -49,6 +51,13 @@ gulp.task('js', function() {
     	//.pipe(uglify()).on('error', gutil.log)
     //.pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('build/js'));
+});
+
+gulp.task('css', function() {
+  return gulp.src(['src/*.css'])
+    .pipe(concat('bundle.css'))
+    .pipe(minifyCss())
+    .pipe(gulp.dest('build/'));
 });
 
 gulp.task('index', function() {

@@ -26,9 +26,24 @@ var PaulSearchResults = React.createClass({
         open={person.id == this.state.openItem}
         onToggle={this.handleToggleResultItem}/>
     );
+    let matchesExist = matches.length > 0;
+    let info;
+    if(!matchesExist) {
+      info = (
+        <div className="alert alert-info">
+          <h1>Willkommen im PAUL-Telefonbuch</h1>
+          <p>Hier kannst Du Telefonnummern und E-Mail-Adressen von Paulis und Kunden einfach und schnell finden.</p>
+          <p>Gib dazu mindestens drei Zeichen ein! Die Suche verzeiht Dir auch kleine Fehler.</p>
+          <p>Pro-Tipp: Du kannst auch Telefonnummern rückwärts suchen. (-;</p>
+        </div>
+      );
+    }
     return (
       <div className="PaulSearchResults">
-        {results}
+        {info}
+        <ul className="results">
+          {results}
+        </ul>
       </div>
     );
   }

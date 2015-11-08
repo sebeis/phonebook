@@ -33,7 +33,9 @@ var PaulSearchResultItemBody = React.createClass({
     }
     return (
       <div className="panel-body">
-        <img className="media-object img-thumbnail" src={this.props.person.imageUrl} />
+        <img
+          className="media-object img-thumbnail"
+          src={this.props.person.imageUrl} />
         {phones}
         {mails}
       </div>

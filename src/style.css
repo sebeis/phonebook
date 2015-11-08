@@ -1,0 +1,100 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+#app {
+  max-width: 1100px;
+  margin: auto;
+  box-shadow: 0px 5px 5px grey;
+}
+
+.loading-indicator i {
+  -webkit-animation: spin 1s linear infinite;
+  -moz-animation: spin 1s linear infinite;
+  animation: spin 1s linear infinite;
+}
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); } }
+
+.alert h1 {
+  margin-top: 0;
+  font-size: 22px;
+}
+
+.panel {
+  margin-bottom: 1px;
+}
+
+.panel-heading h1 {
+  margin: 0;
+  font-size: 32px;
+  cursor: pointer;
+}
+
+.panel-heading h1 span {
+  margin-right: .5em;
+}
+
+.panel-heading h1 small {
+  font-size: 50%;
+}
+
+.panel-primary .panel-heading h1 * {
+  color: white;
+}
+
+.panel-heading .btn-toolbar {
+  margin-left: 2em;
+}
+
+.panel-heading .btn {
+  font-size: 18px;
+}
+
+.panel-primary .panel-heading .btn {
+  background: #3071a9;
+  border-color: #285e8e;
+}
+.panel-primary .panel-heading .btn:hover {
+  background: white;
+  color: #428bca;
+  border-color: #3071a9;
+}
+
+.ng-hide-add, .ng-hide-remove {
+  display: block !important;
+}
+
+.panel-body {
+  font-size: 18px;
+}
+
+.panel-body img {
+  float: right;
+  max-width:300px;
+  max-width: 20%;
+  max-height:300px;
+  width: auto;
+  height: auto;
+  border: 1px solid #c3c3c8;
+  border-radius: 3px;
+}
+
+.panel-body h2:first-of-type {
+  margin-top: 0;
+}
+
+.panel-body ul {
+  list-style-type: disc;
+  padding-left: 1.25em;
+}
+
+.panel-body ul a:not(:hover) {
+  color: black;
+}
