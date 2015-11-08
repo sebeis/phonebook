@@ -16,6 +16,9 @@ function handleError(err) {
   this.emit('end');
 }
 
+gulp.task('build', ['js', 'css', 'index'], function() {
+})
+
 gulp.task('watch', ['connect'], function() {
 	gulp.start('reload');
   gulp.watch(['src/**/*'], ['reload']);
@@ -47,9 +50,9 @@ gulp.task('js', function() {
     .bundle().on('error', handleError)
     .pipe(source('bundle.js'))
 		.pipe(buffer())
-		//.pipe(sourcemaps.init({loadMaps: true}))
-    	//.pipe(uglify()).on('error', gutil.log)
-    //.pipe(sourcemaps.write('./'))
+		.pipe(sourcemaps.init({loadMaps: true}))
+    	.pipe(uglify()).on('error', gutil.log)
+    .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('build/js'));
 });
 
