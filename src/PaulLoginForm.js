@@ -9,7 +9,8 @@ var PaulLoginForm = React.createClass({
   getInitialState: function() {
     return {
       isVisible: false,
-      hasLoginFailed: false
+      hasLoginFailed: false,
+      errorMessage: ''
     }
   },
   componentWillMount: function() {
@@ -27,20 +28,51 @@ var PaulLoginForm = React.createClass({
     let warning;
     if(this.state.hasLoginFailed) {
       warning = (
-        <h1>Failed</h1>
+        <p className="alert alert-danger">{this.state.errorMessage}</p>
       );
     }
     return (
-      <form className="PaulLoginForm" onSubmit={this.handleSubmit}>
+      <form role="form" ng-submit="login()" onSubmit={this.handleSubmit}>
         {warning}
-        <input type="text" placeholder="Dein LDAP Name" ref="username" />
-        <input type="password" placeholder="Passwort" ref="password" />
-        <input type="submit" value="Login" />
+        <div className="form-group">
+          <label htmlFor="username">Benutzername</label>
+          <input
+            className="form-control"
+            type="text" ref="username"
+            name="username"
+            defaultValue={CredentialStorageService.getStoredCredentials().username}/>
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Passwort</label>
+          <input
+            className="form-control"
+            type="password"
+            ref="password"
+            name="password"
+            defaultValue={CredentialStorageService.getStoredCredentials().password}/>
+        </div>
+        <div className="checkbox">
+          <label>
+            <input
+              className="checkbox"
+              type="checkbox"
+              ref="rememberCheckbox"
+              defaultChecked/>
+            Zugangsdaten merken
+          </label>
+        </div>
+        <button className="btn btn-default" type="submit">Anmelden</button>
       </form>
     );
   },
   handleSubmit: function(e) {
     e.preventDefault();
+    if(this.refs.rememberCheckbox.checked) {
+      CredentialStorageService.storeCredentials({
+        username: this.refs.username.value,
+        password: this.refs.password.value
+      });
+    };
     this.tryLogin({
       username: this.refs.username.value,
       password: this.refs.password.value
@@ -51,10 +83,21 @@ var PaulLoginForm = React.createClass({
       .then((response) => {
         this.props.handleSuccessfullLoginAndData(response);
       }, (response) => {
-        this.setState({
-          isVisible: true,
-          hasLoginFailed: true
-        });
+        let unAuthorized = response.status == 401;
+        if(unAuthorized) {
+          this.setState({
+            isVisible: true,
+            hasLoginFailed: true,
+            errorMessage: 'Unbekannter Benutzername oder falsches Passwort!'
+          });
+        } else {
+          this.setState({
+            isVisible: true,
+            hasLoginFailed: true,
+            errorMessage: 'Unbekannter Fehler, bitte melde dich beim Ressort IT'
+          });
+        }
+
       }
     );
   }
