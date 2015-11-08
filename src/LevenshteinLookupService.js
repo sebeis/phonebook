@@ -50,8 +50,17 @@ function lookup (input) {
     return [];
   }
 
-  var resultsInNames = lookupInNames(input);
-  var resultsInPhoneNumbers = lookupInPhoneNumbers(input);
+  var numberOfDigits = (input.match(/\d/g) || []).length;
+  var moreDigitsThanOthers = numberOfDigits > input / 2;
+  
+  if(moreDigitsThanOthers) {
+    var resultsInNames = [];
+    var resultsInPhoneNumbers = lookupInPhoneNumbers(input);
+  } else {
+    var resultsInNames = lookupInNames(input);
+    var resultsInPhoneNumbers = [];
+  }
+
   return prepareResults(resultsInNames, resultsInPhoneNumbers);
 }
 
