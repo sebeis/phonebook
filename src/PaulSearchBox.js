@@ -9,21 +9,21 @@ var PaulSearchBox = React.createClass({
   },
   getInitialState: function() {
     return {
+      matches: []
     };
   },
   componentDidMount: function() {
     LookupService.setData(this.props.data);
   },
   handleSearchInput: function(text) {
-    var matches = LookupService.getMatches(text);
-    this.refs.results.updateMatches(matches);
+    this.setState({matches: LookupService.getMatches(text)});
   },
   render: function() {
     return (
       <div className="PaulSearchBox">
         <PaulSearchBar
           handleSearchInput={this.handleSearchInput}/>
-        <PaulSearchResults ref="results"/>
+        <PaulSearchResults matches={this.state.matches}/>
       </div>
     );
   }

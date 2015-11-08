@@ -2,29 +2,33 @@ import * as React from 'react';
 import PaulSearchResultItem from './PaulSearchResultItem';
 
 var PaulSearchResults = React.createClass({
+  propTypes: {
+    matches: React.PropTypes.array.isRequired
+  },
   getInitialState: function() {
     return {
-      matches: [],
       openItem: null
     }
   },
-  handleOpenResultItem: function(id) {
-    this.setState({openItem: id});
-  },
-  updateMatches: function(matches) {
-    this.setState({matches: prepareResults(matches)});
+  handleToggleResultItem: function(id) {
+    if(this.state.openItem == id) {
+      this.setState({openItem: null});
+    } else {
+      this.setState({openItem: id});
+    }
   },
   render: function() {
-    var content = this.state.matches.map(
+    var matches = prepareResults(this.props.matches);
+    var results = matches.map(
       person => <PaulSearchResultItem
         person={person}
         key={person.id}
         open={person.id == this.state.openItem}
-        onOpen={this.handleOpenResultItem}/>
+        onToggle={this.handleToggleResultItem}/>
     );
     return (
       <div className="PaulSearchResults">
-        {content}
+        {results}
       </div>
     );
   }

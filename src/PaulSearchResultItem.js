@@ -5,10 +5,10 @@ var PaulSearchResultItem = React.createClass({
   propTypes: {
     person: React.PropTypes.object.isRequired,
     open: React.PropTypes.bool.isRequired,
-    onOpen: React.PropTypes.func.isRequired
+    onToggle: React.PropTypes.func.isRequired
   },
   handleHeaderClick: function(e) {
-    this.props.onOpen(this.props.person.id);
+    this.props.onToggle(this.props.person.id);
   },
   render: function() {
     var body;
