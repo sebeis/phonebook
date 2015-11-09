@@ -50,9 +50,9 @@ gulp.task('js', function() {
     .bundle().on('error', handleError)
     .pipe(source('bundle.js'))
 		.pipe(buffer())
-		// .pipe(sourcemaps.init({loadMaps: true}))
-    // 	.pipe(uglify()).on('error', gutil.log)
-    // .pipe(sourcemaps.write('./'))
+		.pipe(sourcemaps.init({loadMaps: true}))
+    	.pipe(uglify()).on('error', gutil.log)
+    .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('build/js'));
 });
 
