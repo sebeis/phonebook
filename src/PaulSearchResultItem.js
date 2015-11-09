@@ -17,21 +17,15 @@ var PaulSearchResultItem = React.createClass({
         <PaulSearchResultItemBody person={this.props.person}/>
       );
     }
+    var contactIcons = generateContactIcons(
+      this.props.person.primaryPhone,
+      this.props.person.primaryMail
+    );
+
     return (
       <li className={'panel person ' + (this.props.open ? 'panel-primary' : '')}>
         <div className="panel-heading">
-          <div className="btn-toolbar pull-right">
-            <a className="btn btn-primary"
-              href={"tel: " + this.props.person.primaryPhone}
-              title="Anrufen" target="_blank">
-              <i className="glyphicon glyphicon-phone-alt"></i>
-            </a>
-            <a className="btn btn-primary"
-              href={"mailto: " + this.props.person.primaryMail}
-              title="E-Mail schreiben" target="_blank">
-              <i className="glyphicon glyphicon-envelope"></i>
-            </a>
-          </div>
+          {contactIcons}
           <h1 onClick={this.handleHeaderClick}>
             <span>{this.props.person.name}</span>
             <small>{this.props.person.primaryPhone}</small>
@@ -43,4 +37,39 @@ var PaulSearchResultItem = React.createClass({
     );
   }
 });
+
+function generateContactIcons(phone, mail) {
+  return (
+    <div className="btn-toolbar pull-right">
+      {generatePhoneIcon(phone)}
+      {generateMailIcon(mail)}
+    </div>
+  );
+}
+
+function generatePhoneIcon(phone) {
+  var hasPhone = phone !== undefined;
+  if(hasPhone) {
+    return (
+      <a className="btn btn-primary"
+        href={"tel: " + phone}
+        title="Anrufen" target="_blank">
+        <i className="glyphicon glyphicon-phone-alt"></i>
+      </a>
+    );
+  }
+}
+function generateMailIcon(mail) {
+  var hasMail = mail !== undefined;
+  if(hasMail) {
+    return (
+      <a className="btn btn-primary"
+        href={"mailto: " + mail}
+        title="E-Mail schreiben" target="_blank">
+        <i className="glyphicon glyphicon-envelope"></i>
+      </a>
+    );
+  }
+}
+
 export default PaulSearchResultItem
