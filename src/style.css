@@ -86,7 +86,7 @@ html, body {
   border-radius: 3px;
 }
 
-.panel-body h2:first-of-type {
+.panel-body div:first-of-type h2 {
   margin-top: 0;
 }
 

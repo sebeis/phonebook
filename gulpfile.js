@@ -57,7 +57,7 @@ gulp.task('js', function() {
 });
 
 gulp.task('css', function() {
-  return gulp.src(['src/*.css'])
+  return gulp.src(['src/cssreset.css', 'src/style.css'])
     .pipe(concat('bundle.css'))
     .pipe(minifyCss())
     .pipe(gulp.dest('build/'));
