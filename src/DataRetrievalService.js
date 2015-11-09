@@ -2,9 +2,9 @@ import * as $ from 'jquery';
 
 export function sendCredentialsAsync(username, password) {
   return new Promise((resolve, reject) => {
-    $.post('http://10.10.101.104:5443/api',
+    $.post('api.php',
       {user: username, pw: password})
-      .done((response) => resolve(response))
+      .done((response) => resolve(JSON.parse(response)))
       .fail((response) => reject(response));
   });
 }
