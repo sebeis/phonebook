@@ -51,14 +51,17 @@ function lookup (input) {
   }
 
   var numberOfDigits = (input.match(/\d/g) || []).length;
-  var moreDigitsThanOthers = numberOfDigits > input / 2;
-  
+  var moreDigitsThanOthers = (numberOfDigits > (input.length / 2));
+
+  var resultsInNames;
+  var resultsInPhoneNumbers;
+
   if(moreDigitsThanOthers) {
-    var resultsInNames = [];
-    var resultsInPhoneNumbers = lookupInPhoneNumbers(input);
+    resultsInNames = [];
+    resultsInPhoneNumbers = lookupInPhoneNumbers(input);
   } else {
-    var resultsInNames = lookupInNames(input);
-    var resultsInPhoneNumbers = [];
+    resultsInNames = lookupInNames(input);
+    resultsInPhoneNumbers = [];
   }
 
   return prepareResults(resultsInNames, resultsInPhoneNumbers);
