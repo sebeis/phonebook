@@ -16,7 +16,7 @@ var PaulLoginForm = React.createClass({
   componentWillMount: function() {
     let canUseStorage = CredentialStorageService.canStoreCredentials;
     if(canUseStorage && CredentialStorageService.hasStoredCredentials()) {
-      this.tryLogin(CredentialStorageService.getStoredCredentials);
+      this.tryLogin(CredentialStorageService.getStoredCredentials());
     } else {
       this.setState({isVisible:true});
     }
