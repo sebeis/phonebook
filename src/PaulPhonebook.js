@@ -6,7 +6,7 @@ var PaulPhonebook = React.createClass({
   handleSuccessfullLoginAndData: function(data) {
     this.setState({
       isLoggedIn: true,
-      data: data
+      data: data.contacts
     });
   },
   getInitialState: function() {

@@ -1,5 +1,5 @@
-var LOCAL_STORAGE_KEY_FOR_USERNAME = 'phonebook.credentials.username',
-    LOCAL_STORAGE_KEY_FOR_PASSWORD = 'phonebook.credentials.password';
+var LOCAL_STORAGE_KEY_FOR_USERNAME = 'ldap.credentials.username',
+    LOCAL_STORAGE_KEY_FOR_PASSWORD = 'ldap.credentials.password';
 
 var canStoreCredentials = doesTheBrowserSupportLocalStorage();
 

@@ -16,7 +16,7 @@ var PaulLoginForm = React.createClass({
   componentWillMount: function() {
     let canUseStorage = CredentialStorageService.canStoreCredentials;
     if(canUseStorage && CredentialStorageService.hasStoredCredentials()) {
-      this.tryLogin(CredentialStorageService.getStoredCredentials());
+      this.tryLogin(CredentialStorageService.getStoredCredentials(), true);
     } else {
       this.setState({isVisible:true});
     }
@@ -51,36 +51,24 @@ var PaulLoginForm = React.createClass({
             name="password"
             defaultValue={CredentialStorageService.getStoredCredentials().password}/>
         </div>
-        <div className="checkbox">
-          <label>
-            <input
-              className="checkbox"
-              type="checkbox"
-              ref="rememberCheckbox"
-              defaultChecked/>
-            Zugangsdaten merken
-          </label>
-        </div>
         <button className="btn btn-default" type="submit">Anmelden</button>
       </form>
     );
   },
   handleSubmit: function(e) {
     e.preventDefault();
-    if(this.refs.rememberCheckbox.checked) {
-      CredentialStorageService.storeCredentials({
-        username: this.refs.username.value,
-        password: this.refs.password.value
-      });
-    };
     this.tryLogin({
       username: this.refs.username.value,
       password: this.refs.password.value
     });
   },
-  tryLogin: function(credentials) {
-    DataRetrievalService.sendCredentialsAsync(credentials.username, credentials.password)
+  tryLogin: function(credentials, useHash) {
+    return DataRetrievalService.sendCredentialsAsync(credentials.username, credentials.password, useHash)
       .then((response) => {
+        CredentialStorageService.storeCredentials({
+          username: credentials.username,
+          password: response['pw-hash'],
+        });
         this.props.handleSuccessfullLoginAndData(response);
       }, (response) => {
         let unAuthorized = response.status == 401;
