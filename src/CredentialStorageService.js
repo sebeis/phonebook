@@ -4,10 +4,13 @@ var LOCAL_STORAGE_KEY_FOR_USERNAME = 'phonebook.credentials.username',
 var canStoreCredentials = doesTheBrowserSupportLocalStorage();
 
 function doesTheBrowserSupportLocalStorage () {
+  var test = 'test';
   try {
-    return 'localStorage' in window && window['localStorage'] !== null;
-  } catch (e) {
-    return false;
+      localStorage.setItem(test, test);
+      localStorage.removeItem(test);
+      return true;
+  } catch(e) {
+      return false;
   }
 }
 
